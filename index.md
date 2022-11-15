@@ -4,7 +4,7 @@
 
 ### Home Equity Loan Default Probability
 
-[Random Forest & Decision Tree Model](https://anisbhimani.github.io/pdf/fHome%20Equity%20Default-RF.html)
+[Random Forest & Decision Tree Model](https://anisbhimani.github.io/pdf/Home_EQ_RF.html)
 <img src="images/Project_1.png?raw=true"/>
 
 ---
