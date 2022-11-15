@@ -1,11 +1,11 @@
-title: John Doe # your name (or website title) here
-logo: "logo.png?raw=true" # your photo (or logo) here
+title: Anis Bhimani # your name (or website title) here
+logo: "/logo.png?raw=true" # your photo (or logo) here
 description: > # your text below (remove <br> elements if you don't need line breaks)
-  First description 
+  Experienced Data Science Leader  
   <br><br>
-  Second description 
+  8 years experience in Data Science & 3 years in DS Leadership 
   <br><br>
-  <a href="https://www.linkedin.com/in/example/">View My LinkedIn Profile</a> 
+  <a href="https://www.linkedin.com/in/anisbhimani/">View My LinkedIn Profile</a> 
   
 theme: jekyll-theme-minimal
 google_analytics: UA-000000-0 # your Google Analytics tracking ID here
