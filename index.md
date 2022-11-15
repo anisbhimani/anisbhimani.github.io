@@ -4,8 +4,8 @@
 
 ### Home Equity Loan Default Probability
 
-[Random Forest & Decision Tree Model](/sample_page)
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
+[Random Forest & Decision Tree Model](https://anisbhimani.github.io/pdf/fHome Equity Default-RF.html)
+<img src="images/Project_1.png?raw=true"/>
 
 ---
 [Gradient Boosting Model](/pdf/sample_presentation.pdf)
