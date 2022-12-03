@@ -1,8 +1,8 @@
-## Portfolio
+# Portfolio
 
 ---
 
-### Home Equity Loan Default Probability
+## Home Equity Loan Default Probability
 
 [Random Forest & Decision Tree Model](https://anisbhimani.github.io/pdf/Home%20Equity%20Default-RF.html)
 <img src="images/Data_1.jpg?raw=true"/>
@@ -23,12 +23,9 @@
 - [Sudoku Answer Checker](https://github.com/anisbhimani/anisbhimani.github.io/blob/main/Code/Sudoku_Checker.ipynb)
 
 ---
-### Neural Network (in progress)
+## Neural Network (in progress)
 
 - [Project 1 Title](http://example.com/)
 - [Project 2 Title](http://example.com/)
 
 ---
-
-
-<!-- Remove above link if you don't want to attibute -->
