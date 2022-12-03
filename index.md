@@ -20,7 +20,7 @@
 
 ## Coding Challenges 
 
-- [Sudoku Answer Checker](https://anisbhimani.github.io/Code/Sudoku_Checker.ipynb) 
+- [Sudoku Answer Checker](https://github.com/anisbhimani/anisbhimani.github.io/blob/main/Code/Sudoku_Checker.ipynb)
 
 ---
 ### Neural Network (in progress)
