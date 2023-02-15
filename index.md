@@ -23,9 +23,9 @@
 - [Sudoku Answer Checker](https://github.com/anisbhimani/anisbhimani.github.io/blob/main/Code/Sudoku_Checker.ipynb)
 
 ---
-## Neural Network (in progress)
+## Neural Networks
 
-- [Project 1 Title](http://example.com/)
+- [Solving MNIST using Keras](https://github.com/anisbhimani/anisbhimani.github.io/blob/main/MNIST%20Neural%20Network%20w%20Keras.ipynb)
 - [Project 2 Title](http://example.com/)
 
 ---
