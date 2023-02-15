@@ -1,0 +1,451 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyNwIFfBHVpwat/i+0YE9zzK",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/anisbhimani/anisbhimani.github.io/blob/main/Keras%20NN%20on%20MNIST\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Chapter 2: NN Math"
+      ],
+      "metadata": {
+        "id": "QW1tUGBg-Z7t"
+      }
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "id": "zUwk1ngX-Vwl"
+      },
+      "outputs": [],
+      "source": [
+        "import keras\n",
+        "import tensorflow as tf"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Notes: \n",
+        "\n",
+        "**Class**: Category in a classification problem \n",
+        "\n",
+        "**Samples**: data points \n",
+        "\n",
+        "**Label**: class associated with a specific sample \n",
+        "\n",
+        "**Layer**: a data-processing module that is a filter for data\n"
+      ],
+      "metadata": {
+        "id": "pbiaHpsB_hcW"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#MNIST is the numerical dataset to test #s 0-9\n",
+        "from keras.datasets import mnist"
+      ],
+      "metadata": {
+        "id": "1b9nyi2D-qCt"
+      },
+      "execution_count": 2,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Fill the variables below with the MNIST data\n",
+        "(train_images, train_labels), (test_images, test_labels) = mnist.load_data()"
+      ],
+      "metadata": {
+        "id": "J3_U0CWh_3y9",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "cdfb22a1-1277-418c-bc4a-2979c77c702e"
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Downloading data from https://storage.googleapis.com/tensorflow/tf-keras-datasets/mnist.npz\n",
+            "11490434/11490434 [==============================] - 0s 0us/step\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#The train_images variable is a numpy array with 60k elements\n",
+        "#Each element is a 28x28 grid w 0 and 1s if the pixel is lit up \n",
+        "train_images.shape"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "poXi42bNANBV",
+        "outputId": "70ddfd75-20bf-40d8-d4df-1480183fad9e"
+      },
+      "execution_count": 5,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "(60000, 28, 28)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 5
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Training label (y value) is also 60k elements \n",
+        "#Each one of these is a 0-9 for the corresponding #\n",
+        "len(train_labels)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "Bw5_Qg-WAhCx",
+        "outputId": "27e64378-0f04-4c6f-8fa2-7a685aac1c36"
+      },
+      "execution_count": 6,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "60000"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 6
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#We test it on 10k rows\n",
+        "test_images.shape"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "HH0j36DhAmYl",
+        "outputId": "95f94a72-02d3-41a6-80e3-d62d509cc512"
+      },
+      "execution_count": 7,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "(10000, 28, 28)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 7
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "len(test_labels)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "unAzVASQAu_J",
+        "outputId": "a2f56208-9e39-45e7-d071-95a978ce4136"
+      },
+      "execution_count": 8,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "10000"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 8
+        }
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "We will build 2 *Dense* layers \n",
+        "\n",
+        "**Densely connected**: fully connected\n",
+        "\n",
+        "**Softmax**: how many results we want (in this case 10 for digits 0-9)\n"
+      ],
+      "metadata": {
+        "id": "lXnp4wF9smBA"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from keras import models\n",
+        "from keras import layers "
+      ],
+      "metadata": {
+        "id": "NvONGZmYAwnS"
+      },
+      "execution_count": 9,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#We'll go through layer 1 then layer 2 sequentially\n",
+        "network = models.Sequential()"
+      ],
+      "metadata": {
+        "id": "7XPhx-_mA6lX"
+      },
+      "execution_count": 10,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "network.add(layers.Dense(512, activation='relu', input_shape=(28 * 28,)))"
+      ],
+      "metadata": {
+        "id": "Q1qN-B0MBANS"
+      },
+      "execution_count": 11,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Each of the 10 nodes will give a probability b/t 0 and 1 that the # is that one\n",
+        "#Results sum up to 1\n",
+        "network.add(layers.Dense(10, activation='softmax'))"
+      ],
+      "metadata": {
+        "id": "YoHN_d7iB-f_"
+      },
+      "execution_count": 12,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Now we need 3 more things: \n",
+        "\n",
+        "\n",
+        "1.   Loss fxn: how the model will measure performance & steer itself in the right direction\n",
+        "2.   Optmizer: mechanism through wich the network will update itself base on the data & loss fxn\n",
+        "3.   Metrics to monitor: in this case we only care about accuracy (fraction of images correctly classified) \n",
+        "\n"
+      ],
+      "metadata": {
+        "id": "qwq6ZDMatara"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "network.compile(optimizer = 'rmsprop',\n",
+        "                loss = 'categorical_crossentropy',\n",
+        "                metrics = ['accuracy'])"
+      ],
+      "metadata": {
+        "id": "KtuZ9nRCBa_L"
+      },
+      "execution_count": 13,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Finally, we reshape the data & scale it so everything is between 0 and 1. \n",
+        "Right now it's stored in the interval 0-255 so we can transform it by dividing by 255"
+      ],
+      "metadata": {
+        "id": "wTu6CG-mt85R"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "train_images = train_images.reshape((60000, 28 * 28))\n",
+        "train_images = train_images.astype('float32') / 255"
+      ],
+      "metadata": {
+        "id": "wspCI1tKopNd"
+      },
+      "execution_count": 14,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "test_images = test_images.reshape((10000, 28 * 28))\n",
+        "test_images = test_images.astype('float32') / 255"
+      ],
+      "metadata": {
+        "id": "CbNSlIBKpECl"
+      },
+      "execution_count": 15,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Bring in the categorgical package\n",
+        "from keras.utils import to_categorical\n",
+        "\n",
+        "train_labels = to_categorical(train_labels)\n",
+        "test_labels = to_categorical(test_labels)"
+      ],
+      "metadata": {
+        "id": "-4x0sStepO9j"
+      },
+      "execution_count": 16,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Train the model \n",
+        "network.fit(train_images, train_labels, epochs = 5, batch_size = 128)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "i2-QRU13pbGE",
+        "outputId": "94127e55-29ff-49b2-fd95-eb05eace1239"
+      },
+      "execution_count": 17,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Epoch 1/5\n",
+            "469/469 [==============================] - 5s 9ms/step - loss: 0.2649 - accuracy: 0.9241\n",
+            "Epoch 2/5\n",
+            "469/469 [==============================] - 5s 11ms/step - loss: 0.1075 - accuracy: 0.9686\n",
+            "Epoch 3/5\n",
+            "469/469 [==============================] - 4s 9ms/step - loss: 0.0694 - accuracy: 0.9787\n",
+            "Epoch 4/5\n",
+            "469/469 [==============================] - 4s 9ms/step - loss: 0.0508 - accuracy: 0.9848\n",
+            "Epoch 5/5\n",
+            "469/469 [==============================] - 5s 11ms/step - loss: 0.0384 - accuracy: 0.9881\n"
+          ]
+        },
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "<keras.callbacks.History at 0x7fbc844f14f0>"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 17
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Test it against test data\n",
+        "test_loss, test_acc = network.evaluate(test_images, test_labels)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "UDUsV1A3rWoi",
+        "outputId": "86d13ef0-6bfb-409d-8ab6-0a502abc6a14"
+      },
+      "execution_count": 18,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "313/313 [==============================] - 1s 3ms/step - loss: 0.0682 - accuracy: 0.9779\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print('test_acc:', test_acc)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "EGYp1SuHrs3-",
+        "outputId": "ead0186d-3742-4eb2-8f35-86ca691a182c"
+      },
+      "execution_count": 19,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "test_acc: 0.9779000282287598\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "EuBst_Fjr1el"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
